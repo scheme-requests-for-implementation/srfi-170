@@ -40,6 +40,11 @@
   <li>Draft #11 published: 2020-09-08</li>
   <li>Draft #12 published: 2020-10-24</li>
   <li>Finalized: 2020-10-28</li>
+  <li>Revised to fix errata:
+    <ul>
+      <li>2026-02-16 (Fixed <a href="#erratum-1">mistake</a>
+        about <code>user-supplementary-gids</code>, which cannot be
+        used to retrieve the list of group member ids.)</li></ul></li>
 </ul>
 
 
@@ -856,7 +861,7 @@ and callers must be prepared to handle it.
 </blockquote>
 <div><code>(group-info:name <i>group-info</i>)</code> &nbsp;&rarr; <i>string</i>&nbsp;&nbsp;</div>
 <div><code>(group-info:gid <i>group-info</i>)</code> &nbsp;&rarr; <i>exact integer</i>&nbsp;&nbsp;</div>
-<blockquote>Returns the group name and group id stored in <i>group-info</i>.  The list of group member ids can be retrieved with the above <code>(user-supplementary-gids)</code></blockquote>
+<blockquote id="erratum-1">Returns the group name and group id stored in <i>group-info</i>.  The list of member names is not available in this SRFI; in any case, it is not normally maintained.</blockquote>
 
 <h3 id="node_sec_3.7">3.7&nbsp;&nbsp;[Intentionally omitted]</h3>
 
