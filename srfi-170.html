@@ -253,7 +253,7 @@ that set <code>errno</code></li>
 </ul>
 
 <h3 id="node_sec_3.2">3.2&nbsp;&nbsp;I/O</h3>
-<p></p>
+
 <p>Dealing with P<small>OSIX</small> file descriptors in a Scheme environment is difficult.
 In P<small>OSIX</small>, open files are part of the process environment, and are referenced
 by small exact integers called <i>file descriptors</i>. Open file descriptors are
@@ -296,7 +296,6 @@ As an exception, <code>open-file</code> is provided, because
 it allows arguments that the Scheme standard does not.  It returns
 a port of a specified type.
 </p>
-<p>
 <div><code>binary-input</code></div>
 <div><code>textual-input</code></div>
 <div><code>binary-output</code></div>
@@ -353,11 +352,11 @@ twice on the same fd.
 <h3>3.3&nbsp;&nbsp;File system</h3>
 <p>The following procedures allow access to the
 computer's file system.
-<p>
-<div><code>(create-directory <i>fname [permission-bits]</i>)</code> &nbsp;&rarr; <i><i>undefined</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>mkdir()</code></div>
-<div><code>(create-fifo <i>fname [permission-bits]</i>)</code> &nbsp;&rarr; <i><i>undefined</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>mkfifo()</code></div>
-<div><code>(create-hard-link <i>old-fname new-fname</i>)</code> &nbsp;&rarr; <i><i>undefined</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>link()</code></div>
-<div><code>(create-symlink <i>old-fname new-fname</i>)</code> &nbsp;&rarr; <i><i>undefined</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>symlink()</code></div>
+</p>
+<div><code>(create-directory <i>fname [permission-bits]</i>)</code> &nbsp;&rarr; <i>undefined</i>&nbsp;&nbsp; P<small>OSIX</small> <code>mkdir()</code></div>
+<div><code>(create-fifo <i>fname [permission-bits]</i>)</code> &nbsp;&rarr; <i>undefined</i>&nbsp;&nbsp; P<small>OSIX</small> <code>mkfifo()</code></div>
+<div><code>(create-hard-link <i>old-fname new-fname</i>)</code> &nbsp;&rarr; <i>undefined</i>&nbsp;&nbsp; P<small>OSIX</small> <code>link()</code></div>
+<div><code>(create-symlink <i>old-fname new-fname</i>)</code> &nbsp;&rarr; <i>undefined</i>&nbsp;&nbsp; P<small>OSIX</small> <code>symlink()</code></div>
 
 <blockquote><p>
 These procedures create objects of various kinds in the file system.
@@ -366,13 +365,12 @@ If an object with the same name already exists, an exception is signaled.</p>
 The <i>permission-bits</i> for <code>create-directory</code>
 default to <code>#o775</code>, and for <code>create-fifo</code>
 to <code>#o664</code>, but are masked by the current umask.
-<p>
 </p></blockquote>
 
-<div><code>(read-symlink <i>fname</i>)</code> &nbsp;&rarr; <i><i>string</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>readlink()</code></div>
+<div><code>(read-symlink <i>fname</i>)</code> &nbsp;&rarr; <i>string</i>&nbsp;&nbsp; P<small>OSIX</small> <code>readlink()</code></div>
 <blockquote>Return the filename referenced by the symlink <i>fname</i>.
 </blockquote>
-<div><code>(rename-file <i>old-fname new-fname</i>)</code> &nbsp;&rarr; <i><i>undefined</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>rename()</code></div>
+<div><code>(rename-file <i>old-fname new-fname</i>)</code> &nbsp;&rarr; <i>undefined</i>&nbsp;&nbsp; P<small>OSIX</small> <code>rename()</code></div>
 <blockquote>If you override an existing object, then <i>old-fname</i>
 and <i>new-fname</i> must type-match &mdash; either both directories,
 or both non-directories.
@@ -386,15 +384,14 @@ procedure: if you create file <code>new-fname</code> sometime between
 <code>rename-file</code>'s existence check and the actual rename operation,
 your file will be clobbered with <code>old-fname</code>. There is no way to
 prevent this problem; at least it is highly unlikely to occur in practice.
-</blockquote><p>
-</blockquote><p>
-</p>
-<p></p>
-<div><code>(delete-directory <i>fname</i>)</code> &nbsp;&rarr; <i><i>undefined</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>rmdir()</code></div>
+</blockquote>
+</blockquote>
+
+<div><code>(delete-directory <i>fname</i>)</code> &nbsp;&rarr; <i>undefined</i>&nbsp;&nbsp; P<small>OSIX</small> <code>rmdir()</code></div>
 <blockquote>This procedure deletes directories from the file system.
 An error is signaled if <i>fname</i> is not a directory or is not empty.
 </blockquote>
-<div><code>(set-file-owner <i>fname uid gid</i>)</code> &nbsp;&rarr; <i><i>undefined</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>chown()</code></div>
+<div><code>(set-file-owner <i>fname uid gid</i>)</code> &nbsp;&rarr; <i>undefined</i>&nbsp;&nbsp; P<small>OSIX</small> <code>chown()</code></div>
 
 <blockquote>
 This procedure sets the owner and group of a
@@ -405,11 +402,9 @@ if the gid argument is the constant <code>group/unchanged</code>,
 the group is not changed.
 Setting file ownership usually requires root privileges.
 This procedure follows symlinks and changes the files to which they refer.
-</blockquote><p>
-</p>
-<p></p>
-<p></p>
-<div><code>(set-file-times <i>fname [access-time-object modify-time-object]</i>)</code> &nbsp;&rarr; <i><i>undefined</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>utimensat()</code></div>
+</blockquote>
+
+<div><code>(set-file-times <i>fname [access-time-object modify-time-object]</i>)</code> &nbsp;&rarr; <i>undefined</i>&nbsp;&nbsp; P<small>OSIX</small> <code>utimensat()</code></div>
 
 <blockquote>
 This procedure sets the access and modified times for the file
@@ -425,18 +420,12 @@ This procedure
 will follow symlinks and set the times of the file to which it refers.
 If the procedure completes successfully, the file's time of last
 status-change (<code>ctime</code>) is set to the current time.
-</blockquote><p>
-</p>
-<p></p>
-<p></p>
-<p></p>
-<div><code>(truncate-file <i>fname/port len</i>)</code> &nbsp;&rarr; <i><i>undefined</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>truncate()</code></div>
+</blockquote>
+
+<div><code>(truncate-file <i>fname/port len</i>)</code> &nbsp;&rarr; <i>undefined</i>&nbsp;&nbsp; P<small>OSIX</small> <code>truncate()</code></div>
 <blockquote>The specified file is truncated to <i>len</i> bytes in length.
-</blockquote><p>
-</p>
-<p></p>
-<p></p>
-<p></p>
+</blockquote>
+
 <div><code>(file-info <i>fname/port follow?</i>)</code> &nbsp;&rarr; <i>file-info-record</i>&nbsp;&nbsp; P<small>OSIX</small> <code>stat()</code></div>
 <blockquote>
 The <code>file-info</code> procedure
@@ -502,13 +491,13 @@ have been present and unchanged since the Sixth Edition of Research Unix):</p>
 examine several bits.</p>
 
 </blockquote>
-<p></p>
-<div><code>(file-info-directory? <i>file-info</i>)</code> &nbsp;&rarr; <i><i>boolean</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>S_ISDIR()</code></div>
-<div><code>(file-info-fifo? <i>file-info</i>)</code> &nbsp;&rarr; <i><i>boolean</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>S_ISFIFO()</code></div>
-<div><code>(file-info-symlink? <i>file-info</i>)</code> &nbsp;&rarr; <i><i>boolean</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>S_ISLNK()</code></div>
-<div><code>(file-info-regular? <i>file-info</i>)</code> &nbsp;&rarr; <i><i>boolean</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>S_ISREG()</code></div>
-<div><code>(file-info-socket? <i>file-info</i>)</code> &nbsp;&rarr; <i><i>boolean</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>S_IFIFO()</code></div>
-<div><code>(file-info-device? <i>file-info</i>)</code> &nbsp;&rarr; <i><i>boolean</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>S_ISCHR() || S_ISBLK()</code></div>
+
+<div><code>(file-info-directory? <i>file-info</i>)</code> &nbsp;&rarr; <i>boolean</i>&nbsp;&nbsp; P<small>OSIX</small> <code>S_ISDIR()</code></div>
+<div><code>(file-info-fifo? <i>file-info</i>)</code> &nbsp;&rarr; <i>boolean</i>&nbsp;&nbsp; P<small>OSIX</small> <code>S_ISFIFO()</code></div>
+<div><code>(file-info-symlink? <i>file-info</i>)</code> &nbsp;&rarr; <i>boolean</i>&nbsp;&nbsp; P<small>OSIX</small> <code>S_ISLNK()</code></div>
+<div><code>(file-info-regular? <i>file-info</i>)</code> &nbsp;&rarr; <i>boolean</i>&nbsp;&nbsp; P<small>OSIX</small> <code>S_ISREG()</code></div>
+<div><code>(file-info-socket? <i>file-info</i>)</code> &nbsp;&rarr; <i>boolean</i>&nbsp;&nbsp; P<small>OSIX</small> <code>S_IFIFO()</code></div>
+<div><code>(file-info-device? <i>file-info</i>)</code> &nbsp;&rarr; <i>boolean</i>&nbsp;&nbsp; P<small>OSIX</small> <code>S_ISCHR() || S_ISBLK()</code></div>
 
 <blockquote>
 These procedures are file-type predicates that test the
@@ -527,14 +516,14 @@ P<small>OSIX</small> special-cases permission checking when the uid is 0 (<code>
 However, not even root can write a file stored on a read-only file system,
 such as a CD-ROM.</p>
 </blockquote>
-<p></p>
-<div><code>(set-file-mode <i>fname mode-bits</i>)</code> &nbsp;&rarr; <i><i>undefined</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>chmod()</code></div>
+
+<div><code>(set-file-mode <i>fname mode-bits</i>)</code> &nbsp;&rarr; <i>undefined</i>&nbsp;&nbsp; P<small>OSIX</small> <code>chmod()</code></div>
 <blockquote>
 This procedure sets the mode bits of a
 file specified by supplying the filename.
 This procedure follows symlinks and changes the files to which they refer.
-</blockquote><p>
-<p></p>
+</blockquote>
+
 <div><code>(directory-files <i>dir [dotfiles?]</i>)</code> &nbsp;&rarr; <i>string list</i>&nbsp;&nbsp;</div>
 
 <blockquote>
@@ -547,8 +536,8 @@ The directory <i>dir</i> is not prepended to each filename in the
 result list. That is,
 </p>
 <blockquote><code>(directory-files "/etc")</code></blockquote>returns
-<blockquote><code>("chown" "exports" "fstab" <code>...</code>)</code></blockquote><i>not</i>
-<blockquote><code>("/etc/chown" "/etc/exports" "/etc/fstab" <code>...</code>)</code></blockquote>To use the filenames in the returned list, the programmer can either manually
+<blockquote><code>("chown" "exports" "fstab" ...)</code></blockquote><i>not</i>
+<blockquote><code>("/etc/chown" "/etc/exports" "/etc/fstab" ...)</code></blockquote>To use the filenames in the returned list, the programmer can either manually
 prepend the directory,
 or change to the directory before using the filenames.
 </blockquote>
@@ -574,7 +563,7 @@ open directory object.</p>
 
 <div><code>(open-directory <i>dir [dot-files?]</i>)</code> &nbsp;&rarr; <i>directory-object</i>&nbsp;&nbsp; P<small>OSIX</small> <code>opendir()</code></div>
 <div><code>(read-directory <i>directory-object</i>)</code> &nbsp;&rarr; <i>string or eof-object</i>&nbsp;&nbsp; P<small>OSIX</small> <code>readdir()</code></div>
-<div><code>(close-directory <i>directory-object</i>)</code> &nbsp;&rarr; <i><i>undefined</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>closedir()</code></div>
+<div><code>(close-directory <i>directory-object</i>)</code> &nbsp;&rarr; <i>undefined</i>&nbsp;&nbsp; P<small>OSIX</small> <code>closedir()</code></div>
 <blockquote>
 <p>
 These procedures implement an interface to the
@@ -614,7 +603,7 @@ or <i>port</i> if it is already open.
 </blockquote>
 
 <div><code>temp-file-prefix</code>&nbsp;<i>string parameter</i></div>
-<p></p>
+
 <blockquote>
 <a href="https://srfi.schemers.org/srfi-39/srfi-39.html">SRFI 39</a>
  or R<sup>7</sup>RS parameter that returns a string when invoked.  Its initial value is
@@ -624,7 +613,7 @@ if <code>TMPDIR</code> is set and to
 On Windows, the temporary directory's name is not fixed, and must be obtained by the
 <code>GetTempPath()</code> API function.
 </blockquote>
-<div><code>(create-temp-file <i>[prefix]</i>)</code> &nbsp;&rarr; <i><i>string</i></i>&nbsp;&nbsp;</div>
+<div><code>(create-temp-file <i>[prefix]</i>)</code> &nbsp;&rarr; <i>string</i>&nbsp;&nbsp;</div>
 <blockquote>Creates a new temporary file and returns its name.
 The optional argument specifies the filename prefix to use, and defaults
 to the result of invoking <code>temp-file-prefix</code>.
@@ -643,9 +632,9 @@ for the uniqueness guarantees to hold. The pid component of the default
 prefix simply serves to scatter the name searches into sparse regions, so
 that collisions are less likely to occur. This speeds things up, but does
 not affect correctness.</p>
-</blockquote><p>
-</p>
-<div><code>(call-with-temporary-filename <i>maker [prefix]</i>)</code> &nbsp;&rarr; <i><i>object</i><sup>+</sup></i>&nbsp;&nbsp;</div>
+</blockquote>
+
+<div><code>(call-with-temporary-filename <i>maker [prefix]</i>)</code> &nbsp;&rarr; <i>object</i><sup>+</sup>&nbsp;&nbsp;</div>
 
 <blockquote>
 This procedure can be used to perform certain atomic transactions on
@@ -654,7 +643,7 @@ the file system involving filenames. Some examples:
 <li>Linking a file to a fresh backup temp name.
 </li><li>Creating and opening an unused, secure temp file.
 </li><li>Creating an unused temporary directory.
-</li></ul><p></p>
+</li></ul>
 <p>
 This procedure uses <i>prefix</i> to generate a series of trial
 filenames.  <i>Prefix</i> is a string, and
@@ -705,18 +694,18 @@ or to return values other than the new filename (for example, an open port).
 
 <h3 id="node_sec_3.4">3.4&nbsp;&nbsp;[Intentionally omitted]</h3>
 
-<p></p>
+
 <h3 id="node_sec_3.5">3.5&nbsp;&nbsp;Process state</h3>
-<p></p>
-<p></p>
-<p></p>
-<div><code>(umask)</code> &nbsp;&rarr; <i><i>exact integer</i></i>&nbsp;&nbsp;P<small>OSIX</small> <code>umask()</code></div>
+
+
+
+<div><code>(umask)</code> &nbsp;&rarr; <i>exact integer</i>&nbsp;&nbsp;P<small>OSIX</small> <code>umask()</code></div>
 <blockquote>
 Returns the current file protection mask, or umask, as an exact integer.
 Whenever a file is created, the specified or default permissions are
 bitwise-anded with the complement of the umask before they are used.
 </blockquote>
-<div><code>(set-umask!&nbsp;<i>umask</i>)</code> &nbsp;&rarr; <i><i>unspecified</i></i>&nbsp;&nbsp;P<small>OSIX</small> <code>umask()</code></div>
+<div><code>(set-umask!&nbsp;<i>umask</i>)</code> &nbsp;&rarr; <i>unspecified</i>&nbsp;&nbsp;P<small>OSIX</small> <code>umask()</code></div>
 <blockquote>
 <p>Sets the file protection mask to the exact integer <i>umask</i>
 and returns an unspecified value.</p>
@@ -731,15 +720,15 @@ that in multi-threaded programs the mask
 be set in the primordial thread before any other threads are created
 <i>and never changed again</i>.</p>
 </blockquote>
-<p></p>
-<p></p>
-<div><code>(current-directory)</code> &nbsp;&rarr; <i><i>string</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>getcwd()</code></div>
+
+
+<div><code>(current-directory)</code> &nbsp;&rarr; <i>string</i>&nbsp;&nbsp; P<small>OSIX</small> <code>getcwd()</code></div>
 <blockquote>
 Returns the current directory as a string containing an absolute pathname.
 Whenever a file is referenced with a relative path, it is interpreted as
 relative to this directory.
 </blockquote>
-<div><code>(set-current-directory!&nbsp;<i>new-directory</i>)</code> &nbsp;&rarr; <i><i>unspecified</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>chdir()</code></div>
+<div><code>(set-current-directory!&nbsp;<i>new-directory</i>)</code> &nbsp;&rarr; <i>unspecified</i>&nbsp;&nbsp; P<small>OSIX</small> <code>chdir()</code></div>
 <blockquote>
 <p>Sets the current directory to <i>new-directory</i>
 and returns an unspecified value.</p>
@@ -754,40 +743,36 @@ that in multi-threaded programs the current directory
 be set in the primordial thread before any other threads are created
 <i>and never changed again</i>.</p>
 </blockquote>
-<p></p>
-<p></p>
-<div><code>(pid<i></i>)</code> &nbsp;&rarr; <i><i>exact integer</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>getpid()</code></div>
+
+<div><code>(pid)</code> &nbsp;&rarr; <i>exact integer</i>&nbsp;&nbsp; P<small>OSIX</small> <code>getpid()</code></div>
 <blockquote>
 Retrieves the process id for the current process.
 </blockquote>
 
-<div><code>(nice <i>[delta]</i>)</code>&rarr; <i><i>exact integer</i></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; P<small>OSIX</small> <code>nice()</code></div>
+<div><code>(nice <i>[delta]</i>)</code>&rarr; <i>exact integer</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; P<small>OSIX</small> <code>nice()</code></div>
 <blockquote><p>
 Increments the niceness of the current process by <i>delta</i>.
 The lower the <i>niceness</i> value is, the more the process is favored during scheduling.
 If <code><i>delta</i></code> is not specified, the increment is 1.
 </p>
 <p>Real-time processes are not affected by <code>nice</code>.</p>
-</blockquote><p>
-</p>
-<div><code>(user-uid<i></i>)</code> &nbsp;&rarr; <i><i>exact integer</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>getuid()</code></div>
-<div><code>(user-gid<i></i>)</code> &nbsp;&rarr; <i><i>exact integer</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>getgid()</code></div>
-<div><code>(user-effective-uid<i></i>)</code> &nbsp;&rarr; <i><i>exact integer</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>geteuid()</code></div>
-<div><code>(user-effective-gid<i></i>)</code> &nbsp;&rarr; <i><i>exact integer</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>getegid()</code></div>
-<div><code>(user-supplementary-gids<i></i>)</code> &nbsp;&rarr; <i><i>exact integer</i> list</i>&nbsp;&nbsp; P<small>OSIX</small> <code>getgroups()</code></div>
+</blockquote>
+<div><code>(user-uid)</code> &nbsp;&rarr; <i>exact integer</i>&nbsp;&nbsp; P<small>OSIX</small> <code>getuid()</code></div>
+<div><code>(user-gid)</code> &nbsp;&rarr; <i>exact integer</i>&nbsp;&nbsp; P<small>OSIX</small> <code>getgid()</code></div>
+<div><code>(user-effective-uid)</code> &nbsp;&rarr; <i>exact integer</i>&nbsp;&nbsp; P<small>OSIX</small> <code>geteuid()</code></div>
+<div><code>(user-effective-gid)</code> &nbsp;&rarr; <i>exact integer</i>&nbsp;&nbsp; P<small>OSIX</small> <code>getegid()</code></div>
+<div><code>(user-supplementary-gids)</code> &nbsp;&rarr; <i>exact integer list</i>&nbsp;&nbsp; P<small>OSIX</small> <code>getgroups()</code></div>
 
 <blockquote>
 For the calling process, these routines get the specified data.  The scsh procedure <code>user-login-name</code>, which uses <code>getlogin()</code> or <code>getlogin_r()</code>, can be simulated with <code>(user-info:name (user-info (user-uid)))</code>, using procedures that are described in the next section.
-</blockquote><p>
-</p>
+</blockquote>
 
 <h3 id="node_sec_3.6">3.6&nbsp;&nbsp;User and group database access</h3>
 <p>These procedures are used to access the user and group databases
 (for example, the ones traditionally stored in <code>/etc/passwd</code> and <code>/etc/group</code>).</p>
-<p>
-</p>
-<p></p>
-<p></p>
+
+
+
 <div><code>(user-info <i>uid/name</i>)</code> &nbsp;&rarr; <i>record</i>&nbsp;&nbsp; P<small>OSIX</small> <code>getpwuid/getpwnam()</code></div>
 
 <blockquote>
@@ -797,9 +782,8 @@ The <i>uid/name</i> argument is either an exact integer user id or a string user
 If <i>uid/name</i> does not identify an existing user, <code>#f</code> is returned;
 this does not constitute an error situation,
 and callers must be prepared to handle it.
-</blockquote><p>
-</p>
-<p></p>
+</blockquote>
+
 <div><code>(user-info? <i>obj</i>)</code> &nbsp;&rarr; <i>boolean</i>&nbsp;&nbsp;</div>
 <blockquote>Returns <code>#t</code> if <i>obj</i> is a user-info record and <code>#f</code> otherwise.
 </blockquote>
@@ -948,10 +932,9 @@ are not aware of any Scheme implementation with the unsuffixed names,
 so the suffix is kept in this SRFI.</p>
 
 <h3 id="node_sec_3.12">3.12&nbsp;&nbsp;Terminal device control</h3>
-<p></p>
-<p>
-</p>
-<div><code>(terminal? <i>port</i>)</code> &nbsp;&rarr; <i><i>boolean</i></i>&nbsp;&nbsp; P<small>OSIX</small> <code>isatty()</code></div>
+
+
+<div><code>(terminal? <i>port</i>)</code> &nbsp;&rarr; <i>boolean</i>&nbsp;&nbsp; P<small>OSIX</small> <code>isatty()</code></div>
 <blockquote>
 Returns true if the argument is a file descriptor that is open on a terminal.
 Raises an exception if the underlying call to <code>isatty()</code> returns an error
