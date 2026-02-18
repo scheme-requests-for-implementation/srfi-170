@@ -44,7 +44,11 @@
     <ul>
       <li>2026-02-16 (Fixed <a href="#erratum-1">mistake</a>
         about <code>user-supplementary-gids</code>, which cannot be
-        used to retrieve the list of group member ids.)</li></ul></li>
+        used to retrieve the list of group member ids.  The new text
+        was wrong, too, and was revised again on 2026-02-18.  John
+        recommends adding <code>(group-info:members group-info)</code>
+        &rarr; <i>string list</i>, which would returns the names of the
+        group members stored in group-info.)</li></ul></li>
 </ul>
 
 
@@ -845,7 +849,7 @@ and callers must be prepared to handle it.
 </blockquote>
 <div><code>(group-info:name <i>group-info</i>)</code> &nbsp;&rarr; <i>string</i>&nbsp;&nbsp;</div>
 <div><code>(group-info:gid <i>group-info</i>)</code> &nbsp;&rarr; <i>exact integer</i>&nbsp;&nbsp;</div>
-<blockquote id="erratum-1">Returns the group name and group id stored in <i>group-info</i>.  The list of member names is not available in this SRFI; in any case, it is not normally maintained.</blockquote>
+<blockquote id="erratum-1">Returns the group name and group id stored in <i>group-info</i>.</blockquote>
 
 <h3 id="node_sec_3.7">3.7&nbsp;&nbsp;[Intentionally omitted]</h3>
 
